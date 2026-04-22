@@ -1,373 +1,457 @@
-/* ============================================================================
-   ROZGAR PAKISTAN - E-Resume Builder Styles
-   Lab 08: ReactJS Integration, Node.js & CRUD Operations
-   ============================================================================ */
+@import url('https://fonts.googleapis.com/css2?family=Syne:wght@600;700;800&family=DM+Sans:wght@300;400;500;600&display=swap');
 
-/* ============================================
-   GLOBAL STYLES
-   ============================================ */
+:root {
+    --navy: #0B1120;
+    --navy-mid: #111827;
+    --navy-light: #1a2540;
+    --navy-card: #162035;
+    --bottle: #1B4332;
+    --bottle-mid: #2D6A4F;
+    --bottle-light: #40916C;
+    --bottle-glow: #52B788;
+    --text: #E8EDF5;
+    --text-muted: #8896B3;
+    --text-dim: #4A5780;
+    --white: #ffffff;
+    --border: rgba(255,255,255,0.07);
+    --shadow: 0 8px 40px rgba(0,0,0,0.5);
+    --shadow-green: 0 4px 24px rgba(27,67,50,0.6);
+    --radius-lg: 18px;
+    --radius-md: 12px;
+    --radius-sm: 8px;
+}
 
-* {
+*, *::before, *::after {
     margin: 0;
     padding: 0;
     box-sizing: border-box;
-    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
 }
 
 body {
-    background-color: #f0f2f5;
+    font-family: 'DM Sans', sans-serif;
+    background: var(--navy);
+    color: var(--text);
     min-height: 100vh;
 }
 
-/* ============================================
-   LOGIN PAGE STYLES
-   ============================================ */
-
-.login-page {
+.app-root {
     min-height: 100vh;
     display: flex;
-    justify-content: center;
+    flex-direction: column;
+}
+
+/* HEADER */
+.app-header {
+    background: var(--navy-mid);
+    border-bottom: 1px solid var(--border);
+    padding: 0 48px;
+    height: 64px;
+    display: flex;
     align-items: center;
-    background: linear-gradient(135deg, #1e5128 0%, #4e9f3d 100%);
+    justify-content: space-between;
+    position: sticky;
+    top: 0;
+    z-index: 100;
 }
 
-.login-container {
-    background: white;
-    padding: 40px;
-    border-radius: 15px;
-    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3);
-    width: 100%;
-    max-width: 400px;
-    text-align: center;
+.header-brand {
+    display: flex;
+    align-items: center;
+    gap: 12px;
 }
 
-.login-container h1 {
-    color: #1e5128;
-    font-size: 28px;
-    margin-bottom: 5px;
+.header-title {
+    font-family: 'Syne', sans-serif;
+    font-size: 1.25rem;
+    font-weight: 700;
+    color: var(--white);
+    letter-spacing: -0.3px;
 }
 
-.login-container .subtitle {
-    color: #666;
-    font-size: 14px;
-    margin-bottom: 30px;
+    .header-title span {
+        color: var(--bottle-glow);
+    }
+
+.header-sub {
+    font-size: 0.65rem;
+    color: var(--text-muted);
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    margin-top: 2px;
 }
 
-/* ============================================
-   FORM STYLES
-   ============================================ */
-
-.form-group {
-    margin-bottom: 20px;
-    text-align: left;
+.header-user {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    animation: fadeIn 0.4s ease;
 }
 
-.form-group label {
-    display: block;
-    margin-bottom: 8px;
-    color: #333;
-    font-weight: 500;
-    font-size: 14px;
-}
-
-.form-group input {
-    width: 100%;
-    padding: 12px 15px;
-    border: 2px solid #e0e0e0;
-    border-radius: 8px;
-    font-size: 15px;
-    transition: all 0.3s;
-}
-
-.form-group input:focus {
-    outline: none;
-    border-color: #4e9f3d;
-    box-shadow: 0 0 0 3px rgba(78, 159, 61, 0.1);
-}
-
-/* ============================================
-   BUTTON STYLES
-   ============================================ */
-
-.btn-login {
-    width: 100%;
-    padding: 14px;
-    background: linear-gradient(135deg, #1e5128 0%, #4e9f3d 100%);
+.avatar {
+    width: 34px;
+    height: 34px;
+    border-radius: 50%;
+    background: var(--bottle-mid);
     color: white;
-    border: none;
-    border-radius: 8px;
-    font-size: 16px;
-    font-weight: 600;
-    cursor: pointer;
-    transition: transform 0.2s, box-shadow 0.2s;
+    font-weight: 700;
+    font-size: 0.88rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border: 2px solid var(--bottle-light);
 }
 
-.btn-login:hover {
-    transform: translateY(-2px);
-    box-shadow: 0 5px 20px rgba(30, 81, 40, 0.4);
-}
-
-.btn-login:disabled {
-    background: #ccc;
-    cursor: not-allowed;
-    transform: none;
+.header-user span {
+    color: var(--text-muted);
+    font-size: 0.88rem;
 }
 
 .btn-logout {
-    background: rgba(255, 255, 255, 0.2);
-    color: white;
-    border: 1px solid rgba(255, 255, 255, 0.3);
-    padding: 8px 20px;
-    border-radius: 5px;
+    background: transparent;
+    border: 1px solid var(--border);
+    color: var(--text-muted);
+    padding: 5px 13px;
+    border-radius: 20px;
+    font-family: 'DM Sans', sans-serif;
+    font-size: 0.78rem;
     cursor: pointer;
-    transition: background 0.3s;
+    transition: all 0.2s;
 }
 
-.btn-logout:hover {
-    background: rgba(255, 255, 255, 0.3);
+    .btn-logout:hover {
+        border-color: var(--bottle-light);
+        color: var(--bottle-glow);
+    }
+
+/* MAIN */
+.app-main {
+    flex: 1;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 48px 24px;
 }
 
-.btn-refresh {
-    background: #4e9f3d;
-    color: white;
-    border: none;
-    padding: 8px 16px;
-    border-radius: 5px;
-    cursor: pointer;
+/* FOOTER */
+.app-footer {
+    text-align: center;
+    padding: 16px;
+    font-size: 0.76rem;
+    color: var(--text-dim);
+    border-top: 1px solid var(--border);
 }
 
-.btn-edit {
-    background: #ffc107;
-    color: #333;
-    border: none;
-    padding: 6px 12px;
-    border-radius: 4px;
-    cursor: pointer;
-    margin-right: 5px;
-    font-size: 13px;
+/* LOGIN */
+.login-wrap {
+    width: 100%;
+    max-width: 400px;
+    animation: slideUp 0.5s ease;
 }
 
-.btn-delete {
-    background: #dc3545;
-    color: white;
-    border: none;
-    padding: 6px 12px;
-    border-radius: 4px;
-    cursor: pointer;
-    font-size: 13px;
+.login-card {
+    background: var(--navy-card);
+    border-radius: var(--radius-lg);
+    border: 1px solid var(--border);
+    box-shadow: var(--shadow);
+    overflow: hidden;
 }
 
-.btn-add {
-    background: #1e5128;
-    color: white;
-    border: none;
-    padding: 12px 25px;
-    border-radius: 8px;
-    cursor: pointer;
-    font-size: 15px;
-    font-weight: 500;
+.login-header {
+    background: linear-gradient(135deg, var(--bottle) 0%, var(--bottle-mid) 100%);
+    padding: 32px 32px 26px;
 }
 
-.btn-add:hover {
-    background: #4e9f3d;
+    .login-header h2 {
+        font-family: 'Syne', sans-serif;
+        font-size: 1.7rem;
+        font-weight: 800;
+        color: white;
+        margin-bottom: 4px;
+    }
+
+    .login-header p {
+        color: rgba(255,255,255,0.55);
+        font-size: 0.85rem;
+    }
+
+.login-body {
+    padding: 28px 32px 32px;
 }
 
-.btn-add:disabled {
-    background: #ccc;
-    cursor: not-allowed;
+/* FORM */
+.form-group {
+    margin-bottom: 16px;
 }
 
-/* ============================================
-   MESSAGE STYLES
-   ============================================ */
+    .form-group label {
+        display: block;
+        font-size: 0.72rem;
+        font-weight: 600;
+        color: var(--text-muted);
+        text-transform: uppercase;
+        letter-spacing: 1.2px;
+        margin-bottom: 7px;
+    }
 
-.message {
-    margin-top: 15px;
+    .form-group input {
+        width: 100%;
+        padding: 11px 14px;
+        background: var(--navy-light);
+        border: 1.5px solid rgba(255,255,255,0.08);
+        border-radius: var(--radius-sm);
+        font-family: 'DM Sans', sans-serif;
+        font-size: 0.93rem;
+        color: var(--text);
+        outline: none;
+        transition: all 0.2s;
+    }
+
+        .form-group input::placeholder {
+            color: var(--text-dim);
+        }
+
+        .form-group input:focus {
+            border-color: var(--bottle-light);
+            box-shadow: 0 0 0 3px rgba(64,145,108,0.15);
+            background: var(--navy-mid);
+        }
+
+.btn-login {
+    width: 100%;
     padding: 12px;
-    border-radius: 8px;
-    font-size: 14px;
-}
-
-.message.error {
-    background: #fee;
-    color: #c00;
-    border: 1px solid #fcc;
-}
-
-.message.success {
-    background: #efe;
-    color: #060;
-    border: 1px solid #cfc;
-}
-
-/* ============================================
-   DEMO INFO BOX
-   ============================================ */
-
-.demo-info {
-    margin-top: 25px;
-    padding: 15px;
-    background: #f8f9fa;
-    border-radius: 8px;
-    font-size: 13px;
-    color: #666;
-    border: 1px dashed #ddd;
-}
-
-.demo-info p {
-    margin: 3px 0;
-}
-
-/* ============================================
-   DASHBOARD STYLES
-   ============================================ */
-
-.dashboard {
-    min-height: 100vh;
-}
-
-.header {
-    background: linear-gradient(135deg, #1e5128 0%, #4e9f3d 100%);
+    background: linear-gradient(135deg, var(--bottle), var(--bottle-mid));
     color: white;
-    padding: 20px 30px;
+    border: none;
+    border-radius: var(--radius-sm);
+    font-family: 'Syne', sans-serif;
+    font-size: 0.95rem;
+    font-weight: 700;
+    cursor: pointer;
+    transition: all 0.25s;
+    margin-top: 6px;
+}
+
+    .btn-login:hover {
+        background: linear-gradient(135deg, var(--bottle-mid), var(--bottle-light));
+        transform: translateY(-2px);
+        box-shadow: var(--shadow-green);
+    }
+
+.error-msg {
+    background: rgba(220,38,38,0.1);
+    border: 1px solid rgba(220,38,38,0.3);
+    color: #f87171;
+    padding: 10px 14px;
+    border-radius: var(--radius-sm);
+    font-size: 0.84rem;
+    margin-top: 12px;
+    text-align: center;
+}
+
+.login-hint {
+    margin-top: 18px;
+    background: rgba(255,255,255,0.03);
+    border: 1px solid var(--border);
+    border-left: 3px solid var(--bottle-light);
+    border-radius: var(--radius-sm);
+    padding: 12px 14px;
+    font-size: 0.8rem;
+    color: var(--text-muted);
+    line-height: 1.8;
+}
+
+    .login-hint strong {
+        color: var(--bottle-glow);
+    }
+
+/* EXPERIENCE */
+.exp-wrap {
+    width: 100%;
+    max-width: 900px;
+    animation: slideUp 0.4s ease;
+}
+
+.welcome-bar {
     display: flex;
-    justify-content: space-between;
     align-items: center;
-    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+    gap: 14px;
+    margin-bottom: 24px;
 }
 
-.header h1 {
-    font-size: 22px;
-}
-
-.user-info {
+.welcome-avatar {
+    width: 50px;
+    height: 50px;
+    border-radius: 14px;
+    background: linear-gradient(135deg, var(--bottle), var(--bottle-mid));
+    color: white;
+    font-family: 'Syne', sans-serif;
+    font-size: 1.3rem;
+    font-weight: 800;
     display: flex;
     align-items: center;
-    gap: 20px;
+    justify-content: center;
+    border: 2px solid var(--bottle-light);
 }
 
-.main-content {
-    max-width: 1000px;
-    margin: 30px auto;
-    padding: 0 20px;
+.welcome-text h2 {
+    font-family: 'Syne', sans-serif;
+    font-size: 1.35rem;
+    font-weight: 700;
+    color: var(--white);
 }
 
-/* ============================================
-   CARD STYLES
-   ============================================ */
+.welcome-text p {
+    font-size: 0.82rem;
+    color: var(--text-muted);
+    margin-top: 2px;
+}
 
+/* CARD */
 .card {
-    background: white;
-    border-radius: 12px;
-    box-shadow: 0 2px 15px rgba(0, 0, 0, 0.08);
-    padding: 25px;
-    margin-bottom: 25px;
-}
-
-.card-header {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
+    background: var(--navy-card);
+    border-radius: var(--radius-lg);
+    border: 1px solid var(--border);
+    overflow: hidden;
     margin-bottom: 20px;
-    padding-bottom: 15px;
-    border-bottom: 2px solid #f0f0f0;
 }
 
-.card-header h2 {
-    color: #1e5128;
-    font-size: 20px;
+.card-head {
+    background: rgba(27,67,50,0.5);
+    border-bottom: 1px solid rgba(64,145,108,0.2);
+    padding: 14px 24px;
+    display: flex;
+    align-items: center;
+    gap: 10px;
 }
 
-/* ============================================
-   TABLE STYLES
-   ============================================ */
+    .card-head h3 {
+        font-family: 'Syne', sans-serif;
+        font-size: 1rem;
+        font-weight: 700;
+        color: var(--bottle-glow);
+    }
 
-.experience-table {
+/* TABLE */
+.exp-table {
     width: 100%;
     border-collapse: collapse;
 }
 
-.experience-table th,
-.experience-table td {
-    padding: 15px;
-    text-align: left;
-    border-bottom: 1px solid #eee;
-}
+    .exp-table thead th {
+        padding: 10px 22px;
+        text-align: left;
+        font-size: 0.7rem;
+        font-weight: 600;
+        text-transform: uppercase;
+        letter-spacing: 1.3px;
+        color: var(--text-dim);
+        border-bottom: 1px solid var(--border);
+        background: rgba(255,255,255,0.02);
+    }
 
-.experience-table th {
-    background: #f8f9fa;
-    color: #333;
-    font-weight: 600;
-    font-size: 14px;
-    text-transform: uppercase;
-}
+    .exp-table tbody tr {
+        border-bottom: 1px solid var(--border);
+        transition: background 0.15s;
+    }
 
-.experience-table tr:hover {
-    background: #f8f9fa;
-}
+        .exp-table tbody tr:hover {
+            background: rgba(255,255,255,0.03);
+        }
 
-/* ============================================
-   BADGE STYLES
-   ============================================ */
+        .exp-table tbody tr:last-child {
+            border-bottom: none;
+        }
+
+    .exp-table td {
+        padding: 13px 22px;
+        font-size: 0.9rem;
+        color: var(--text);
+    }
+
+        .exp-table td strong {
+            color: var(--white);
+            font-weight: 500;
+        }
 
 .badge {
     display: inline-block;
-    padding: 4px 12px;
-    border-radius: 15px;
-    font-size: 12px;
-    font-weight: 500;
+    padding: 3px 10px;
+    border-radius: 20px;
+    font-size: 0.74rem;
+    font-weight: 600;
 }
 
-.badge.current {
-    background: #d4edda;
-    color: #155724;
+.badge-yes {
+    background: rgba(64,145,108,0.18);
+    color: var(--bottle-glow);
+    border: 1px solid rgba(64,145,108,0.35);
 }
 
-.badge.past {
-    background: #e2e3e5;
-    color: #383d41;
+.badge-no {
+    background: rgba(255,255,255,0.05);
+    color: var(--text-dim);
+    border: 1px solid var(--border);
 }
-
-/* ============================================
-   EMPTY STATE
-   ============================================ */
 
 .empty-state {
     text-align: center;
     padding: 40px;
-    color: #888;
+    color: var(--text-muted);
+    font-size: 0.9rem;
 }
 
-.loading {
-    text-align: center;
-    padding: 30px;
-    color: #666;
-}
-
-/* ============================================
-   ADD FORM STYLES
-   ============================================ */
-
-.add-form-container h3 {
-    color: #1e5128;
-    margin-bottom: 15px;
-}
-
-.add-form {
+/* ADD FORM */
+.add-form-grid {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
-    gap: 15px;
+    grid-template-columns: 1fr 1fr 110px auto;
+    gap: 14px;
     align-items: end;
+    padding: 22px 24px;
 }
 
-.add-form input {
-    padding: 12px;
-    border: 2px solid #e0e0e0;
-    border-radius: 8px;
-    font-size: 14px;
+    .add-form-grid .form-group {
+        margin-bottom: 0;
+    }
+
+.btn-save {
+    padding: 11px 20px;
+    background: linear-gradient(135deg, var(--bottle), var(--bottle-mid));
+    color: white;
+    border: none;
+    border-radius: var(--radius-sm);
+    font-family: 'Syne', sans-serif;
+    font-size: 0.88rem;
+    font-weight: 700;
+    cursor: pointer;
+    transition: all 0.2s;
+    white-space: nowrap;
 }
 
-.add-form input:focus {
-    outline: none;
-    border-color: #4e9f3d;
+    .btn-save:hover {
+        background: linear-gradient(135deg, var(--bottle-mid), var(--bottle-light));
+        transform: translateY(-1px);
+        box-shadow: var(--shadow-green);
+    }
+
+/* ANIMATIONS */
+@keyframes slideUp {
+    from {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+    }
+
+    to {
+        opacity: 1;
+    }
 }
